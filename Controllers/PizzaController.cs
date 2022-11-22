@@ -84,6 +84,28 @@ namespace la_mia_pizzeria_static.Controllers
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete (int id)
+
+        { PizzaDbContext db = new PizzaDbContext();
+            Pizza pizzaDaEliminare= db.Pizzas.Where(item => item.Id == id).FirstOrDefault();
+            if (pizzaDaEliminare != null)
+            {
+
+                db.Pizzas.Remove(pizzaDaEliminare);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+                
+            }
+            else
+            return NotFound();
+    
+
+
+        }
+
+
     }
 
 
