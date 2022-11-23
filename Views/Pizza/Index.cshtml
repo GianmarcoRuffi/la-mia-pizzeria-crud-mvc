@@ -15,7 +15,8 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title"><a href="@Url.Action("Dettaglio", new {id = pizza.Id})"> @pizza.Name </a></h5>
+                        <h4 class="card-title"><a href="@Url.Action("Dettaglio", new {id = pizza.Id})"> @pizza.Name </a></h4>
+                        <h5> @pizza.Category.Name</h5>
                         <p class="card-text"></p>
                         <p class="card-title">
                             <strong>
