@@ -39,7 +39,11 @@ namespace la_mia_pizzeria_static.Controllers
 
         [HttpGet]
         public IActionResult Create()
+
         {
+
+            List<Category> categories = db.Categories.ToList();
+
             return View("Create");
         }
 

@@ -1,4 +1,5 @@
 ﻿using la_mia_pizzeria_static.ValidationCustomClasses;
+using Microsoft.Identity.Client;
 using System.ComponentModel.DataAnnotations;
 
 namespace la_mia_pizzeria_static.Models
@@ -8,7 +9,7 @@ namespace la_mia_pizzeria_static.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "La pizza deve avere un nome")]
-        [StringLength(40, ErrorMessage = "Il nome non può avere più di 40 caratteri")]
+        [StringLength(20, ErrorMessage = "Il nome non può avere più di 20 caratteri")]
         public string? Name { get; set; }
 
         [Required(ErrorMessage = "La pizza deve avere una descrizione")]
@@ -25,7 +26,20 @@ namespace la_mia_pizzeria_static.Models
         public double? Prezzo { get; set; }
 
 
+        // Relazione 1 to many
+        public int CategoryId { get; set; }
+
+        //
+        public Category? Category { get; set; }
+
+        //
+
+
         public Pizza() {
+
+    
+
+
         }
 
         public Pizza(string name, string description, string image, double prezzo) {
