@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using la_mia_pizzeria_static.Data;
 
@@ -11,9 +12,11 @@ using la_mia_pizzeria_static.Data;
 namespace lamiapizzeriastatic.Migrations
 {
     [DbContext(typeof(PizzaDbContext))]
-    partial class PizzaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221124080427_AddTagsToPizzas")]
+    partial class AddTagsToPizzas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace lamiapizzeriastatic.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("IngredientePizza", b =>
+            modelBuilder.Entity("PizzaTag", b =>
                 {
                     b.Property<int>("PizzasId")
                         .HasColumnType("int");
@@ -34,7 +37,7 @@ namespace lamiapizzeriastatic.Migrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("IngredientePizza");
+                    b.ToTable("PizzaTag");
                 });
 
             modelBuilder.Entity("la_mia_pizzeria_static.Models.Category", b =>
@@ -55,23 +58,6 @@ namespace lamiapizzeriastatic.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("la_mia_pizzeria_static.Models.Ingrediente", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tags");
-                });
-
             modelBuilder.Entity("la_mia_pizzeria_static.Models.Pizza", b =>
                 {
                     b.Property<int>("Id")
@@ -80,7 +66,7 @@ namespace lamiapizzeriastatic.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -109,7 +95,25 @@ namespace lamiapizzeriastatic.Migrations
                     b.ToTable("Pizzas");
                 });
 
-            modelBuilder.Entity("IngredientePizza", b =>
+            modelBuilder.Entity("la_mia_pizzeria_static.Models.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("PizzaTag", b =>
                 {
                     b.HasOne("la_mia_pizzeria_static.Models.Pizza", null)
                         .WithMany()
@@ -117,7 +121,7 @@ namespace lamiapizzeriastatic.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("la_mia_pizzeria_static.Models.Ingrediente", null)
+                    b.HasOne("la_mia_pizzeria_static.Models.Tag", null)
                         .WithMany()
                         .HasForeignKey("TagsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -128,7 +132,9 @@ namespace lamiapizzeriastatic.Migrations
                 {
                     b.HasOne("la_mia_pizzeria_static.Models.Category", "Category")
                         .WithMany("Pizzas")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
                 });

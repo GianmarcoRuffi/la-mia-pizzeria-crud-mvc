@@ -27,13 +27,15 @@ namespace la_mia_pizzeria_static.Models
 
 
         // Relazione 1 to many
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
         //
         public Category? Category { get; set; }
 
-        //
+        // Relazione many to many
+        public List<Ingrediente>? Tags { get; set; }
 
+        //
 
         public Pizza() {
 
