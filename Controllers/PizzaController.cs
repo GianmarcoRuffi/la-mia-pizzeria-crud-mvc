@@ -169,13 +169,19 @@ namespace la_mia_pizzeria_static.Controllers
 
             Pizza pizza = db.Pizzas.Where(pizza => pizza.Id == id).Include(pizza => pizza.Ingrediente).FirstOrDefault();
 
-            if (pizza == null)
-            {
-                return NotFound();
-            }
+            //if (pizza == null)
+            //{
+            //    return NotFound();
+            //}
+
 
             db.Pizzas.Update(formData.Pizza);
 
+            //pizza.Name = formData.Pizza.Name;
+            //pizza.Description = formData.Pizza.Description;
+            //pizza.Image = formData.Pizza.Image;
+            //pizza.Prezzo = formData.Pizza.Prezzo;
+            //pizza.CategoryID = formData.Pizza.CategoryID;
             pizza.Ingrediente.Clear();
 
             if (formData.IngredientiSelezionati == null)
@@ -191,6 +197,7 @@ namespace la_mia_pizzeria_static.Controllers
 
 
 
+      
             db.SaveChanges();
             return RedirectToAction("Index");
         }
