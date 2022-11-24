@@ -33,7 +33,7 @@ namespace la_mia_pizzeria_static.Models
         public Category? Category { get; set; }
 
         // Relazione many to many
-        public List<Ingrediente>? Tags { get; set; }
+        public List<Ingrediente>? Ingrediente { get; set; }
 
         //
 

@@ -12,8 +12,8 @@ using la_mia_pizzeria_static.Data;
 namespace lamiapizzeriastatic.Migrations
 {
     [DbContext(typeof(PizzaDbContext))]
-    [Migration("20221124130931_AddIngredientsToPizzas")]
-    partial class AddIngredientsToPizzas
+    [Migration("20221124150517_AddIngredientsToPizza")]
+    partial class AddIngredientsToPizza
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -72,7 +72,7 @@ namespace lamiapizzeriastatic.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags");
+                    b.ToTable("Ingredienti");
                 });
 
             modelBuilder.Entity("la_mia_pizzeria_static.Models.Pizza", b =>

@@ -5,7 +5,7 @@
 namespace lamiapizzeriastatic.Migrations
 {
     /// <inheritdoc />
-    public partial class AddIngredientsToPizzas : Migration
+    public partial class AddIngredientsToPizza : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,7 @@ namespace lamiapizzeriastatic.Migrations
                 oldType: "nvarchar(max)");
 
             migrationBuilder.CreateTable(
-                name: "Tags",
+                name: "Ingredienti",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -29,7 +29,7 @@ namespace lamiapizzeriastatic.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tags", x => x.Id);
+                    table.PrimaryKey("PK_Ingredienti", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,15 +43,15 @@ namespace lamiapizzeriastatic.Migrations
                 {
                     table.PrimaryKey("PK_IngredientePizza", x => new { x.PizzasId, x.TagsId });
                     table.ForeignKey(
-                        name: "FK_IngredientePizza_Pizzas_PizzasId",
-                        column: x => x.PizzasId,
-                        principalTable: "Pizzas",
+                        name: "FK_IngredientePizza_Ingredienti_TagsId",
+                        column: x => x.TagsId,
+                        principalTable: "Ingredienti",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_IngredientePizza_Tags_TagsId",
-                        column: x => x.TagsId,
-                        principalTable: "Tags",
+                        name: "FK_IngredientePizza_Pizzas_PizzasId",
+                        column: x => x.PizzasId,
+                        principalTable: "Pizzas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -69,7 +69,7 @@ namespace lamiapizzeriastatic.Migrations
                 name: "IngredientePizza");
 
             migrationBuilder.DropTable(
-                name: "Tags");
+                name: "Ingredienti");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",

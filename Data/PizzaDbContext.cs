@@ -13,7 +13,8 @@ namespace la_mia_pizzeria_static.Data
 
         public DbSet<Category> Categories { get; set; }
 
-        public DbSet<Ingrediente> Tags { get; set; }
+        public DbSet<Ingrediente> Ingredienti { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
