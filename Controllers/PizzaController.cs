@@ -63,7 +63,7 @@ namespace la_mia_pizzeria_static.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(PizzaForm formData)
         {
-            
+
 
             if (!ModelState.IsValid)
             {
@@ -72,6 +72,16 @@ namespace la_mia_pizzeria_static.Controllers
             }
 
             else
+
+                // associazione tag selezionati dall'utente al modello
+                formData.Pizza.Ingrediente = new List<Ingrediente>();
+                foreach (int IngredienteId in formData.IngredientiSelezionati)
+                {
+
+                Ingrediente ingrediente = db.Ingredienti.Where(item => item.Id == IngredienteId).FirstOrDefault();
+                formData.Pizza.Ingrediente.Add(ingrediente);
+
+            }
 
             db.Pizzas.Add(formData.Pizza);
             db.SaveChanges();
