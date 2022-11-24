@@ -41,16 +41,13 @@
 
         <div class="mb-3">
             <strong>Ingredienti:</strong>
-            <select asp-for="IngredientiSelezionati"
-           multiple = "multiple"
-           size=" 10"
-           class="form-control mb-2 mr-sm-2 ml-sm-3 leftList">
-                @foreach (Ingrediente ingrediente in Model.Ingredienti)
-                {
-               
-                        <option value="@ingrediente.Id" selected>@ingrediente.Name</option>
-                  
-                }
+            <select
+                asp-for="IngredientiSelezionati"
+                asp-items="@Model.Ingredienti"
+               multiple = "multiple"
+               size=" 10"
+                class="form-control mb-2 mr-sm-2 ml-sm-3 leftList">
+ 
             </select>
         </div>
 

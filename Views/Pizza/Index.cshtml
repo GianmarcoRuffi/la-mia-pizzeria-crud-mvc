@@ -26,6 +26,9 @@
                         </p>
                         <p class="card-text"></p>
                         <p class="card-text"><small class="text-muted">@pizza.Description</small></p>
+                        <a asp-controller="Pizza" asp-action="Modifica" asp-route-id="@pizza.Id" class="btn btn-outline-secondary btn-sm px-2">Modifica</a>
+                                <p class="card-text"></p>
+                        <form asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id" method="post"> <button type="submit" class="btn btn-outline-danger btn-sm px-2">Elimina</button></form>
                     </div>
                 </div>
             </div>

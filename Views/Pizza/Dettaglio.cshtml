@@ -15,7 +15,14 @@
             <h5 class="fs-3 fw-bold lh-1 mb-2">@Model.Category.Name</h5>
             <h3>@Model.Prezzo €</h3>
             <p class="lead">@Model.Description</p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <span class="fw-bold">Ingredienti Extra:</span>
+            @foreach (Ingrediente ingrediente in Model.Ingrediente)
+            {
+                <div>
+                    <span>@ingrediente.Name</span>
+                </div>
+            }
+            <div class="d-grid gap-2 d-md-flex py-4 justify-content-md-start">
                 <a asp-controller="Pizza" asp-action="Modifica" asp-route-id="@Model.Id" class="btn btn-outline-secondary btn-lg px-4">Modifica Pizza</a>
             
                 <form asp-controller="Pizza" asp-action="Delete" asp-route-id="@Model.Id" method="post"> <button type="submit" class="btn btn-outline-danger btn-lg px-4">Elimina Pizza</button></form>

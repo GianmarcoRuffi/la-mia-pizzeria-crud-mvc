@@ -1,4 +1,6 @@
-﻿namespace la_mia_pizzeria_static.Models.Form
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace la_mia_pizzeria_static.Models.Form
 {
     public class PizzaForm
     {
@@ -7,9 +9,19 @@
 
         public List<Category>? Categories { get; set; }
 
-        public List<Ingrediente>? Ingredienti { get; set; }
 
-        public List<int> IngredientiSelezionati { get; set; }
+        // views: create, update
+        public List<SelectListItem>? Ingredienti { get; set; }
+
+        // model: create, update
+        public List<int>? IngredientiSelezionati { get; set; }
+
+        //public PizzaForm() {
+
+        //    IngredientiSelezionati = new List<int>();
+        //}
+
+
 
     }
 }
