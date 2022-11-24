@@ -1,4 +1,5 @@
 ﻿@model List<Pizza>
+@using la_mia_pizzeria_static.Models.Form
 
 <h1>Pizza</h1>
 
@@ -15,8 +16,8 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h4 class="card-title"><a href="@Url.Action("Dettaglio", new {id = pizza.Id})"> @pizza.Name </a></h4>
-                        <h5> @pizza.Category.Name</h5>
+                        <h2 class="card-title"><a href="@Url.Action("Dettaglio", new {id = pizza.Id})"> @pizza.Name </a></h2>
+                       <h5> @pizza.Category.Name</h5>
                         <p class="card-text"></p>
                         <p class="card-title">
                             <strong>

@@ -1,5 +1,6 @@
 ﻿@model Pizza
 
+
 <h1>Dettaglio della pizza @Model.Name</h1>
 
 
@@ -10,8 +11,8 @@
             <img src="@Model.Image" class="d-block mx-lg-auto img-fluid" alt="@Model.Name" width="700" height="500" loading="in caricamento...">
         </div>
         <div class="col-lg-6">
-            <h1 class="display-5 fw-bold lh-1 mb-3">@Model.Name</h1>
-            <h2 class="display-4 fw-bold lh-1 mb-2">@Model.Category.Name</h2>
+            <h2 class="display-3 fw-bold lh-1 mb-3">@Model.Name</h2>
+            <h5 class="fs-3 fw-bold lh-1 mb-2">@Model.Category.Name</h5>
             <h3>@Model.Prezzo €</h3>
             <p class="lead">@Model.Description</p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
