@@ -12,7 +12,7 @@ using la_mia_pizzeria_static.Data;
 namespace lamiapizzeriastatic.Migrations
 {
     [DbContext(typeof(PizzaDbContext))]
-    [Migration("20221124123734_AddIngredientsToPizzas")]
+    [Migration("20221124130931_AddIngredientsToPizzas")]
     partial class AddIngredientsToPizzas
     {
         /// <inheritdoc />

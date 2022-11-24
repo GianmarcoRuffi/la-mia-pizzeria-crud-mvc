@@ -5,25 +5,11 @@
 namespace lamiapizzeriastatic.Migrations
 {
     /// <inheritdoc />
-    public partial class AddTagsToPizzas : Migration
+    public partial class AddIngredientsToPizzas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Pizzas_Categories_CategoryId",
-                table: "Pizzas");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "CategoryId",
-                table: "Pizzas",
-                type: "int",
-                nullable: false,
-                defaultValue: 0,
-                oldClrType: typeof(int),
-                oldType: "int",
-                oldNullable: true);
-
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
                 table: "Categories",
@@ -39,7 +25,7 @@ namespace lamiapizzeriastatic.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,7 +33,7 @@ namespace lamiapizzeriastatic.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PizzaTag",
+                name: "IngredientePizza",
                 columns: table => new
                 {
                     PizzasId = table.Column<int>(type: "int", nullable: false),
@@ -55,15 +41,15 @@ namespace lamiapizzeriastatic.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PizzaTag", x => new { x.PizzasId, x.TagsId });
+                    table.PrimaryKey("PK_IngredientePizza", x => new { x.PizzasId, x.TagsId });
                     table.ForeignKey(
-                        name: "FK_PizzaTag_Pizzas_PizzasId",
+                        name: "FK_IngredientePizza_Pizzas_PizzasId",
                         column: x => x.PizzasId,
                         principalTable: "Pizzas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PizzaTag_Tags_TagsId",
+                        name: "FK_IngredientePizza_Tags_TagsId",
                         column: x => x.TagsId,
                         principalTable: "Tags",
                         principalColumn: "Id",
@@ -71,39 +57,19 @@ namespace lamiapizzeriastatic.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PizzaTag_TagsId",
-                table: "PizzaTag",
+                name: "IX_IngredientePizza_TagsId",
+                table: "IngredientePizza",
                 column: "TagsId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Pizzas_Categories_CategoryId",
-                table: "Pizzas",
-                column: "CategoryId",
-                principalTable: "Categories",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Pizzas_Categories_CategoryId",
-                table: "Pizzas");
-
             migrationBuilder.DropTable(
-                name: "PizzaTag");
+                name: "IngredientePizza");
 
             migrationBuilder.DropTable(
                 name: "Tags");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "CategoryId",
-                table: "Pizzas",
-                type: "int",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
@@ -113,13 +79,6 @@ namespace lamiapizzeriastatic.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(40)",
                 oldMaxLength: 40);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Pizzas_Categories_CategoryId",
-                table: "Pizzas",
-                column: "CategoryId",
-                principalTable: "Categories",
-                principalColumn: "Id");
         }
     }
 }

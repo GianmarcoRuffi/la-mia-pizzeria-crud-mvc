@@ -7,5 +7,7 @@
 
         public List<Category>? Categories { get; set; }
 
+        public List<Ingrediente>? Ingredienti { get; set; }
+
     }
 }
