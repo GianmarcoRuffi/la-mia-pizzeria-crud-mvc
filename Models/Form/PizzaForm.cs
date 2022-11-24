@@ -9,5 +9,7 @@
 
         public List<Ingrediente>? Ingredienti { get; set; }
 
+        public List<int> IngredientiSelezionati { get; set; }
+
     }
 }
