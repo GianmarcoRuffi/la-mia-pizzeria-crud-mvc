@@ -17,7 +17,7 @@ namespace la_mia_pizzeria_static.Controllers
     {
 
         PizzaDbContext db;
-        IDbPizzeriaRepository pizzeriaRepository;
+        IPizzeriaRepository pizzeriaRepository;
 
 
         public PizzaController() : base()

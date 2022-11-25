@@ -7,7 +7,7 @@ using Microsoft.SqlServer.Server;
 
 namespace la_mia_pizzeria_static.Models.Repositories
 {
-    public class DbPizzeriaRepository : IDbPizzeriaRepository
+    public class DbPizzeriaRepository : IPizzeriaRepository
 
     {
 
@@ -31,11 +31,11 @@ namespace la_mia_pizzeria_static.Models.Repositories
 
         public void Create(Pizza pizza, List<int> IngredientiSelezionati)
         {
-
+            if (IngredientiSelezionati == null)
+            {
+                IngredientiSelezionati = new List<int>();
+            }
             // associazione tag selezionati dall'utente al modello
-
-       
-
             pizza.Ingrediente = new List<Ingrediente>();
             foreach (int IngredienteId in IngredientiSelezionati)
             {
@@ -44,6 +44,7 @@ namespace la_mia_pizzeria_static.Models.Repositories
                pizza.Ingrediente.Add(ingrediente);
 
             }
+
 
             db.Pizzas.Add(pizza);
             db.SaveChanges();
