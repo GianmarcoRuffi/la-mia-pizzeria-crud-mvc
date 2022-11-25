@@ -46,15 +46,16 @@ namespace la_mia_pizzeria_static.Models.Repositories
             db.SaveChanges();
         }
 
-        public void Delete(Pizza pizza)
-        {
-            throw new NotImplementedException();
-        }
-
-
         public void Modifica(Pizza pizza, Pizza formData, List<int>? IngredientiSelezionati)
         {
             throw new NotImplementedException();
         }
+
+        public void Delete(Pizza pizza)
+        {
+            db.Pizzas.Remove(pizza);
+            db.SaveChanges();
+        }
+
     }
 }

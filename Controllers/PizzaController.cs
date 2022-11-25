@@ -216,12 +216,15 @@ namespace la_mia_pizzeria_static.Controllers
             return RedirectToAction("Index");
         }
 
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete (int id)
 
-        { 
+        {
             Pizza pizza = db.Pizzas.Where(item => item.Id == id).FirstOrDefault();
+
             if (pizza == null)
             
                 return NotFound();
@@ -229,8 +232,9 @@ namespace la_mia_pizzeria_static.Controllers
             else
 
                 db.Pizzas.Remove(pizza);
-                db.SaveChanges();
-               return RedirectToAction("Index");
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
 
 
 
