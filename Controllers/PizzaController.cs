@@ -27,6 +27,7 @@ namespace la_mia_pizzeria_static.Controllers
         }
 
 
+        // Index e Detail
         public IActionResult Index()
         {
             List<Pizza> pizze = pizzeriaRepository.All();
@@ -63,6 +64,10 @@ namespace la_mia_pizzeria_static.Controllers
 
         //    return View(pizza);
         //}
+
+
+
+        // Create
 
         [HttpGet]
         public IActionResult Create()
@@ -118,44 +123,36 @@ namespace la_mia_pizzeria_static.Controllers
             return RedirectToAction("Index");
         }
 
+        // Update
+
         [HttpGet]
         public IActionResult Modifica(int id)
 
         {
 
-            Pizza pizza = db.Pizzas.Where(pizza => pizza.Id == id).Include(pizza => pizza.Ingrediente).FirstOrDefault();
+            Pizza pizza = pizzeriaRepository.GetById(id);
 
             if (pizza == null)
                 return NotFound();
+
             PizzaForm formData = new PizzaForm();
 
             formData.Pizza = pizza;
             formData.Categories = db.Categories.ToList();
             formData.Ingredienti = new List<SelectListItem>();
 
-            List<Ingrediente> ListaIngredienti = db.Ingredienti.ToList();
+            List<Ingrediente> listaIngredienti = db.Ingredienti.ToList();
 
-            foreach (Ingrediente ingrediente in ListaIngredienti)
-            {   
+            foreach (Ingrediente ingrediente in listaIngredienti)
+            {
                 formData.Ingredienti.Add(new SelectListItem(
                     ingrediente.Name,
                     ingrediente.Id.ToString(),
-                    pizza.Ingrediente.Any(i => i.Id == ingrediente.Id)
+                    pizza.Ingrediente.Any(t => t.Id == ingrediente.Id)
                    ));
             }
 
             return View(formData);
-
-            //PizzaForm formData = new PizzaForm();
-            //formData.Pizza = db.Pizzas.Where(item => item.Id == id).FirstOrDefault();
-
-            //if (formData.Pizza == null)
-            //    return NotFound();
-
-            //else
-
-            //formData.Categories = db.Categories.ToList();
-            // return View(formData);
         }
 
 
@@ -181,49 +178,30 @@ namespace la_mia_pizzeria_static.Controllers
                 return View(formData);
             }
 
-            Pizza pizza = db.Pizzas.Where(pizza => pizza.Id == id).Include(pizza => pizza.Ingrediente).FirstOrDefault();
+            // Update con nuovo riferimento alla repository
 
-            //if (pizza == null)
-            //{
-            //    return NotFound();
-            //}
+            Pizza pizza = pizzeriaRepository.GetById(id);
 
-
-            db.Pizzas.Update(formData.Pizza);
-
-            //pizza.Name = formData.Pizza.Name;
-            //pizza.Description = formData.Pizza.Description;
-            //pizza.Image = formData.Pizza.Image;
-            //pizza.Prezzo = formData.Pizza.Prezzo;
-            //pizza.CategoryID = formData.Pizza.CategoryID;
-            pizza.Ingrediente.Clear();
-
-            if (formData.IngredientiSelezionati == null)
+            if (pizza == null)
             {
-                formData.IngredientiSelezionati = new List<int>();
+                return NotFound();
             }
 
-            foreach (int ingredientId in formData.IngredientiSelezionati)
-            {
-                Ingrediente ingrediente = db.Ingredienti.Where(i => i.Id == ingredientId).FirstOrDefault();
-                pizza.Ingrediente.Add(ingrediente);
-            }
+            pizzeriaRepository.Modifica(pizza, formData.Pizza, formData.IngredientiSelezionati);
 
-
-
-      
-            db.SaveChanges();
+          
             return RedirectToAction("Index");
         }
 
 
+        //Delete//
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete (int id)
 
         {
-            Pizza pizza = db.Pizzas.Where(item => item.Id == id).FirstOrDefault();
+            Pizza pizza = pizzeriaRepository.GetById(id);
 
             if (pizza == null)
             
@@ -231,8 +209,7 @@ namespace la_mia_pizzeria_static.Controllers
 
             else
 
-                db.Pizzas.Remove(pizza);
-            db.SaveChanges();
+                pizzeriaRepository.Delete(pizza);
 
             return RedirectToAction("Index");
 

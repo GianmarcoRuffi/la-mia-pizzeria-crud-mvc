@@ -46,10 +46,35 @@ namespace la_mia_pizzeria_static.Models.Repositories
             db.SaveChanges();
         }
 
+
+
+
         public void Modifica(Pizza pizza, Pizza formData, List<int>? IngredientiSelezionati)
         {
-            throw new NotImplementedException();
+            if (IngredientiSelezionati == null)
+            {
+                IngredientiSelezionati = new List<int>();
+            }
+
+            pizza.Name = formData.Name;
+            pizza.Name = formData.Description;
+            pizza.Name = formData.Image;
+            pizza.CategoryId = formData.CategoryId;
+            pizza.Ingrediente.Clear();
+
+
+            foreach (int ingredienteId in IngredientiSelezionati)
+            {
+                Ingrediente ingrediente = db.Ingredienti.Where(item => item.Id == ingredienteId).FirstOrDefault();
+                pizza.Ingrediente.Add(ingrediente);
+            }
+
+            db.SaveChanges();
+
         }
+
+
+
 
         public void Delete(Pizza pizza)
         {
