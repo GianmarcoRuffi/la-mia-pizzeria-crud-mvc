@@ -3,7 +3,7 @@
 
 <div class="container">
     <h1>Modifica la tua Pizza:</h1>
-    <form method="post" asp-controller="Pizza" asp-action="Modifica">
+    <form method="post" asp-controller="Pizza" asp-action="Modifica" asp-route-id="@Model.Pizza.Id">
 @Html.AntiForgeryToken()
 
 @*campo nome*@

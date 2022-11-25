@@ -57,8 +57,9 @@ namespace la_mia_pizzeria_static.Models.Repositories
             }
 
             pizza.Name = formData.Name;
-            pizza.Name = formData.Description;
-            pizza.Name = formData.Image;
+            pizza.Description = formData.Description;
+            pizza.Prezzo = formData.Prezzo;
+            pizza.Image = formData.Image;
             pizza.CategoryId = formData.CategoryId;
             pizza.Ingrediente.Clear();
 
