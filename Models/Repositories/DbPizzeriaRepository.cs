@@ -33,6 +33,9 @@ namespace la_mia_pizzeria_static.Models.Repositories
         {
 
             // associazione tag selezionati dall'utente al modello
+
+       
+
             pizza.Ingrediente = new List<Ingrediente>();
             foreach (int IngredienteId in IngredientiSelezionati)
             {
